@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -7,57 +6,37 @@
   <title>AI Writer Kit — запусти автоворонку и контент за 7 дней</title>
   <meta name="description" content="Система для быстрого запуска заявок: PDF-гайд, шаблоны, Telegram-бот и чек-листы. Первые лиды через 48 часов." />
   <style>
-    :root{ --bg:#0d1117; --panel:#111827; --panel-2:#0f172a; --text:#E5E7EB; --muted:#9CA3AF;
-      --brand1:#6366F1; --brand2:#22D3EE; --cta:#4F46E5; --cta-hover:#6366F1;
-      --stroke:#1f2937; --green:#10B981; --amber:#F59E0B; --red:#EF4444;
-      --radius:18px; --shadow:0 18px 50px rgba(0,0,0,.35); }
-    *{box-sizing:border-box} html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
-    a{color:#93C5FD;text-decoration:none} a:hover{text-decoration:underline}
+    :root{ --bg:#0d1117; --panel:#111827; --text:#E5E7EB; --muted:#9CA3AF; --brand1:#6366F1; --brand2:#22D3EE; --stroke:#1f2937; --radius:18px; --shadow:0 18px 50px rgba(0,0,0,.35);}
+    *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,Segoe UI,Roboto,Inter,Arial,sans-serif}
     .wrap{max-width:1160px;margin:0 auto;padding:20px}
-    header{position:sticky;top:0;z-index:10;background:rgba(13,17,23,.6);backdrop-filter:blur(8px);border-bottom:1px solid var(--stroke)}
+    header{position:sticky;top:0;background:rgba(13,17,23,.6);backdrop-filter:blur(8px);border-bottom:1px solid var(--stroke);z-index:10}
     nav{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
-    .nav-links a{color:var(--muted);padding:8px 12px;border-radius:10px;font-weight:600}
-    .nav-links a:hover{background:#0b1220;color:var(--text)}
-    .btn{display:inline-flex;gap:10px;align-items:center;justify-content:center;padding:14px 18px;border-radius:14px;border:1px solid var(--stroke);font-weight:800;box-shadow:var(--shadow)}
+    .nav a{color:var(--muted);padding:8px 12px;border-radius:10px;font-weight:600;text-decoration:none} .nav a:hover{background:#0b1220;color:var(--text)}
+    .btn{display:inline-flex;gap:10px;align-items:center;justify-content:center;padding:14px 18px;border-radius:14px;border:1px solid var(--stroke);font-weight:800;box-shadow:var(--shadow);text-decoration:none}
     .btn-cta{background:linear-gradient(135deg,var(--brand1),var(--brand2));color:#0b0f1a}
-    .btn-cta:hover{filter:brightness(1.05)}
-    .btn-ghost{background:#0b1220;color:var(--text)}
     .badge{display:inline-flex;gap:8px;align-items:center;background:#0b1220;border:1px solid var(--stroke);border-radius:999px;padding:8px 12px;color:var(--muted);font-weight:700}
     .hero{display:grid;grid-template-columns:1.1fr .9fr;gap:28px;align-items:center;padding:48px 0}
     h1{font-size:48px;line-height:1.05;margin:10px 0} .lead{color:var(--muted);font-size:18px;margin:8px 0 18px}
-    .kpis{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0}
-    .kpi{display:flex;gap:8px;align-items:center;background:#0b1220;border:1px solid var(--stroke);border-radius:12px;padding:10px 12px;color:var(--muted);font-weight:700}
-    .kpi b{color:var(--text)}
-    .hero-media{background:linear-gradient(180deg,#0e1326,#0c1222);border:1px solid var(--stroke);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);padding:0}
-    .pdf-frame{display:block;width:100%;height:460px;border:0}
-    .pdf-toolbar{display:flex;justify-content:flex-end;padding:12px;background:#0c1222;border-bottom:1px solid var(--stroke)}
-    .pill{display:inline-block;background:#0b1220;border:1px solid var(--stroke);padding:6px 10px;border-radius:999px;color:var(--muted);font-size:12px;margin-right:6px}
+    .kpis{display:flex;gap:12px;flex-wrap:wrap;margin:10px 0} .kpi{background:#0b1220;border:1px solid var(--stroke);border-radius:12px;padding:10px 12px;color:var(--muted);font-weight:700}
+    .hero-media{background:linear-gradient(180deg,#0e1326,#0c1222);border:1px solid var(--stroke);border-radius:22px;overflow:hidden;box-shadow:var(--shadow);padding:12px}
+    .hero-media img{display:block;width:100%;height:auto;border-radius:14px;border:1px solid var(--stroke)}
     .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:18px} .grid-2{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
     .card{background:linear-gradient(180deg,#111827,#0f172a);border:1px solid var(--stroke);border-radius:var(--radius);padding:22px;box-shadow:var(--shadow)}
     .price .num{font-size:40px;font-weight:900;background:linear-gradient(135deg,var(--brand1),var(--brand2));-webkit-background-clip:text;background-clip:text;color:transparent}
-    .check{list-style:none;margin:0;padding:0} .check li{display:flex;gap:10px;align-items:flex-start;padding:8px 0;border-bottom:1px dashed var(--stroke)}
-    .check i{display:inline-block;width:22px;height:22px;background:var(--green);border-radius:6px}
-    .countdown{display:flex;gap:10px;margin-top:10px} .cd-box{background:#0b1220;border:1px solid var(--stroke);border-radius:12px;padding:10px 12px;text-align:center} .cd-box b{display:block;font-size:22px}
-    .trust-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px} .trust-row .t{background:#0b1220;border:1px solid var(--stroke);border-radius:10px;padding:6px 10px;color:var(--muted);font-size:12px}
-    .sticky-cta{position:fixed;bottom:10px;left:0;right:0;display:flex;justify-content:center;z-index:20}
-    .sticky-cta a{padding:12px 18px;border-radius:999px} .footer{text-align:center;color:var(--muted);font-size:12px;padding:30px 0}
-    @media(max-width: 920px){.hero{grid-template-columns:1fr} h1{font-size:38px} .pdf-frame{height:360px}} 
+    @media(max-width:920px){.hero{grid-template-columns:1fr} h1{font-size:38px}}
   </style>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <nav>
-      <div class="nav-links">
+    <nav class="nav">
+      <div>
         <strong>AI Writer Kit</strong>
         <a href="#inside">Что внутри</a>
-        <a href="#proof">Доверие</a>
         <a href="#price">Цена</a>
         <a href="#faq">FAQ</a>
       </div>
-      <div class="nav-links">
-        <a class="btn btn-cta" href="https://t.me/aiwriterkit_bot">Получить доступ</a>
-      </div>
+      <a class="btn btn-cta" href="https://t.me/aiwriterkit_bot">Получить доступ</a>
     </nav>
   </div>
 </header>
@@ -69,29 +48,22 @@
       <h1>AI Writer Kit — запусти автоворонку и контент за 7 дней</h1>
       <p class="lead"><b>Хочешь быстрых заявок без команды?</b> Система создаёт контент, ведёт клиента и приносит заявки — пока ты занимаешься делом.</p>
       <div class="kpis">
-        <div class="kpi">✅ <b>137</b> запусков</div>
-        <div class="kpi">⚡ От идеи до заявок — <b>48 ч</b></div>
+        <div class="kpi">✅ 137 запусков</div>
+        <div class="kpi">⚡ От идеи до заявок — 48 ч</div>
         <div class="kpi">💸 Без команды и лишних затрат</div>
       </div>
-      <p style="margin:12px 0 16px">
+      <p style="margin:12px 0 0">
         <a class="btn btn-cta" href="https://t.me/aiwriterkit_bot">Получить доступ за $49</a>
-        <a class="btn btn-ghost" href="#inside">Что внутри</a>
       </p>
-      <span class="pill">PDF‑гайд</span><span class="pill">Шаблоны</span><span class="pill">Telegram‑бот</span><span class="pill">Чек‑листы</span>
-      <div class="trust-row"><span class="t">7‑дневная гарантия</span><span class="t">Подходит новичкам</span><span class="t">5–7 часов настройки</span></div>
     </div>
     <div class="hero-media">
-      <div class="pdf-toolbar">
-        <a class="btn btn-cta" href="./ai-writer-kit-guide.pdf" download>Скачать PDF →</a>
-      </div>
-      <object class="pdf-frame" data="./ai-writer-kit-guide.pdf#page=1" type="application/pdf">
-        <div style="padding:18px">Не удалось отобразить превью. <a class="btn btn-cta" href="./ai-writer-kit-guide.pdf">Скачать PDF →</a></div>
-      </object>
+      <img src="./ai-writer-kit-guide-cover.png" alt="AI Writer Kit — превью PDF" />
+      <p style="text-align:right;margin:8px 0 0"><a class="btn btn-cta" href="./ai-writer-kit-guide-dark.pdf" download>Скачать PDF →</a></p>
     </div>
   </section>
 
   <section id="inside" class="grid-3">
-    <div class="card"><h3>📘 PDF‑гайд</h3><p>Посписочный план на 7 дней: что делать каждый день и куда нажать.</p></div>
+    <div class="card"><h3>📘 PDF‑гайд</h3><p>План на 7 дней: что делать каждый день и куда нажать.</p></div>
     <div class="card"><h3>📝 Шаблоны</h3><p>Готовые тексты постов, писем и лендингов. Просто подставь своё.</p></div>
     <div class="card"><h3>🤖 Telegram‑бот</h3><p>Выдаёт материалы и автоматизирует продажи/партнёрку.</p></div>
     <div class="card"><h3>✅ Чек‑листы</h3><p>Отмечай выполненное — не собьёшься с курса.</p></div>
@@ -99,55 +71,20 @@
     <div class="card"><h3>🌍 Масштаб</h3><p>RU/EN/ES — готово к международному запуску.</p></div>
   </section>
 
-  <section id="proof" class="grid-2" style="margin-top:18px">
-    <div class="card">
-      <h2>Отзывы</h2>
-      <ul class="check">
-        <li><i></i><div>«Собрал за выходные по чек‑листам. 6 заявок на второй день» — Антон</div></li>
-        <li><i></i><div>«Шаблоны экономят часы. Просто вставляешь своё и публикуешь» — Мария</div></li>
-        <li><i></i><div>«Бот убрал рутину. Продажи идут без моего участия» — Денис</div></li>
-      </ul>
-    </div>
-    <div class="card">
-      <h2>Почему это работает</h2>
-      <ul class="check">
-        <li><i></i><div>Простая схема: оффер → лендинг → бот → трафик.</div></li>
-        <li><i></i><div>Сильный копирайтинг: боль → выгода → действие.</div></li>
-        <li><i></i><div>Риск‑ревёрс: 7‑дн. гарантия возврата.</div></li>
-      </ul>
-      <p style="margin-top:10px"><a class="btn btn-cta" href="https://t.me/aiwriterkit_bot">Получить доступ сейчас</a></p>
-    </div>
-  </section>
-
   <section id="price" class="grid-2" style="margin-top:18px">
     <div class="card price">
       <h2>Доступ сегодня</h2>
-      <p style="margin:0 0 8px"><del style="color:var(--muted)">$99</del> <span class="num">$49</span> <span style="color:var(--amber);font-weight:800">— экономия 50%</span></p>
-      <ul class="check">
-        <li><i></i><div>PDF‑гайд</div></li>
-        <li><i></i><div>Шаблоны контента</div></li>
-        <li><i></i><div>Доступ к боту</div></li>
-        <li><i></i><div>Чек‑листы</div></li>
+      <p style="margin:0 0 8px"><del style="color:#9CA3AF">$99</del> <span class="num">$49</span> <span style="color:#F59E0B;font-weight:800">— экономия 50%</span></p>
+      <ul>
+        <li>PDF‑гайд</li><li>Шаблоны контента</li><li>Доступ к боту</li><li>Чек‑листы</li>
       </ul>
-      <div class="countdown">
-        <div class="cd-box"><b id="d">0</b>дн</div>
-        <div class="cd-box"><b id="h">0</b>ч</div>
-        <div class="cd-box"><b id="m">0</b>м</div>
-        <div class="cd-box"><b id="s">0</b>с</div>
-      </div>
-      <p style="color:var(--muted);font-size:12px">Цена действует до окончания таймера.</p>
       <p><a class="btn btn-cta" href="https://t.me/aiwriterkit_bot">Взять за $49 →</a></p>
     </div>
     <div class="card">
       <h2>Пакет «Запуск за руку»</h2>
       <p class="num" style="margin:0">$299</p>
-      <ul class="check">
-        <li><i></i><div>Всё из базового</div></li>
-        <li><i></i><div>Индивидуальная дорожная карта</div></li>
-        <li><i></i><div>Разбор лендинга и воронки</div></li>
-        <li><i></i><div>Приоритетная поддержка</div></li>
-      </ul>
-      <p><a class="btn btn-ghost" href="https://t.me/aiwriterkit_bot">Выбрать этот пакет →</a></p>
+      <ul><li>Всё из базового</li><li>Индивидуальная дорожная карта</li><li>Разбор лендинга и воронки</li><li>Приоритетная поддержка</li></ul>
+      <p><a class="btn" href="https://t.me/aiwriterkit_bot">Выбрать этот пакет →</a></p>
     </div>
   </section>
 
@@ -165,23 +102,5 @@
   </section>
 </main>
 
-<div class="sticky-cta">
-  <a class="btn btn-cta" href="https://t.me/aiwriterkit_bot">Взять AI Writer Kit за $49</a>
-</div>
-
-<footer class="footer">© 2025 • AI Writer Kit. Не является публичной офертой.</footer>
-
-<script>
-  const deadline = new Date('2025-09-11T16:23:10Z').getTime();
-  const D = document.getElementById('d'), H=document.getElementById('h'), M=document.getElementById('m'), S=document.getElementById('s');
-  setInterval(()=>{
-    const now = Date.now(); let t = Math.max(0, deadline - now);
-    const d=Math.floor(t/86400000); t-=d*86400000;
-    const h=Math.floor(t/3600000); t-=h*3600000;
-    const m=Math.floor(t/60000); t-=m*60000;
-    const s=Math.floor(t/1000);
-    D.textContent=d; H.textContent=h; M.textContent=m; S.textContent=s;
-  },1000);
-</script>
-</body>
-</html>
+<footer class="wrap" style="color:#9CA3AF;font-size:12px;text-align:center;padding:30px 0">© 2025 • AI Writer Kit. Не является публичной офертой.</footer>
+</body></html>
